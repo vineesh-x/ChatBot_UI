@@ -1,34 +1,53 @@
-import React, { useState } from 'react';
-import { SafeAreaView, StatusBar, ScrollView, TouchableOpacity, Image, View, useColorScheme } from 'react-native';
-import ModalMenu from './components/ModalMenu';
-import { styles } from './styles/styles';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import HomeScreen from '../src/screens/HomeScreen';
+import MealScreen from '../src/screens/MealScreen';
+import RecipeScreen from '../src/screens/RecipeScreen';
+import VoiceChatScreen from '../src/screens/VoiceChatScreen';
+import ScanFoodScreen from '../src/screens/ScanFoodScreen';
+import LearnMyFoodInfoScreen from '../src/screens/LearnMyFoodInfoScreen';
+import CameraGalleryScreen from './screens/CameraGalleryScreen';
 
-const App: React.FC = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-  const backgroundStyle = { backgroundColor: isDarkMode ? Colors.darker : Colors.lighter };
-  const [modalVisible, setModalVisible] = useState(false);
+const Stack = createStackNavigator();
 
-  const showModal = () => setModalVisible(true);
-  const hideModal = () => setModalVisible(false);
-
+export default function App() {
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView contentInsetAdjustmentBehavior="automatic" style={backgroundStyle}>
-        <View style={{ backgroundColor: isDarkMode ? Colors.black : Colors.white }}>
-          <TouchableOpacity onPress={showModal}>
-            <Image source={require('./assets/chatpot.png')} style={styles.chatpotImage} />
-          </TouchableOpacity>
-
-          <ModalMenu modalVisible={modalVisible} hideModal={hideModal} />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen
+          name="Check My meal with AI"
+          component={MealScreen}
+          options={{
+            headerBackTitle: '.',
+          }}
+        />
+        <Stack.Screen name="Make a Recipe" component={RecipeScreen}  options={{
+            headerBackTitle: '.',
+          }}/>
+        <Stack.Screen name="Voice Chat" component={VoiceChatScreen}  options={{
+            headerBackTitle: '',
+          }}/>
+        <Stack.Screen name="Scan Food" component={ScanFoodScreen}  options={{
+            headerBackTitle: '.',
+          }}/>
+        <Stack.Screen
+          name="Learn about your foods"
+          component={LearnMyFoodInfoScreen}
+          options={{
+            headerBackTitle: '.',
+          }}
+        />
+         <Stack.Screen
+          name="Camera-Gallery"
+          component={CameraGalleryScreen}
+          options={{
+            headerShown: false,
+            headerBackTitle: '.',
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-};
-
-export default App;
+}

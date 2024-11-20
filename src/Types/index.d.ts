@@ -3,4 +3,8 @@ export interface MenuItemProps {
     image: any;
     onPress: () => void;
   }
+
+  export type RootStackParamList = {
+    'Camera-Gallery': { source: string };
+  };
   
