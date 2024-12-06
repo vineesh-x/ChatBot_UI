@@ -134,10 +134,10 @@ export const styles = StyleSheet.create({
 
   textInput: {
     flex: 1,
-    marginHorizontal: 10,
+    marginHorizontal: 5,
     padding: 10,
     borderRadius: 15,
-    textAlign: 'center',
+    textAlign: 'left',
     fontSize: 16,
     borderColor: 'transparent',
     borderWidth: 1,
@@ -168,10 +168,12 @@ export const styles = StyleSheet.create({
   },
   iconLeft: {
     paddingHorizontal: 10,
+    borderRadius: 10,
   },
 
   iconRight: {
     paddingHorizontal: 10,
+    borderRadius: 10,
   },
   modalOverlay: {
     flex: 1,
