@@ -1,13 +1,11 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {TextInput, TouchableOpacity, View} from 'react-native';
-import {styles} from '../../styles/styles';
-import Microphone from '../../assets/icons/microphone.svg';
-import Camera from '../../assets/icons/camera.svg';
 import AudioRecorderPlayer from 'react-native-audio-recorder-player';
 import {startRecording, stopRecording} from '../../utils/audio';
+import {PrimaryInputBar} from './PrimaryInputBar';
+import RecordinBar from './RecordingBar';
 
 export const InputBar = ({handleCameraClick = () => {}}) => {
-  const [isRecording, setIsRecording] = useState(false);
+  const [isRecording, setIsRecording] = useState(true);
   const [recordingTimeOut, setRecordingTimeOut] = useState<NodeJS.Timeout>();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [recordedAudioUri, setRecordedAudioUri] = useState<string>();
@@ -41,7 +39,7 @@ export const InputBar = ({handleCameraClick = () => {}}) => {
   };
 
   const recordAudio = () => {
-    stopAudioRecording();
+    // stopAudioRecording();
     //Todo: rename variable
     const recording = setTimeout(() => {
       stopAudioRecording();
@@ -54,26 +52,44 @@ export const InputBar = ({handleCameraClick = () => {}}) => {
     });
   };
 
-  return (
-    <View style={styles.chatContainer}>
-      <TouchableOpacity
-        style={styles.iconLeft}
-        onPress={() => handleCameraClick()}>
-        <Camera style={styles.cameraImage} />
-      </TouchableOpacity>
-
-      <TextInput
-        editable
-        style={styles.textInput}
-        placeholder="Type a message"
-        placeholderTextColor="#7E7E7F"
-        multiline
-        numberOfLines={10}
+  if (!isRecording) {
+    return (
+      <PrimaryInputBar
+        handleCameraClick={handleCameraClick}
+        startRecording={recordAudio}
       />
+    );
+  }
 
-      <TouchableOpacity style={styles.iconRight} onPress={recordAudio}>
-        <Microphone style={styles.menuItemImage} />
-      </TouchableOpacity>
-    </View>
-  );
+  return <RecordinBar onStopRecording={stopAudioRecording} />;
 };
+
+// const ChatIcon = () => {
+//   const [isVisible, setIsVisible] = useState(false);
+//   return (
+//     <>
+//       <TouchableOpacity
+//         style={styles.iconRight}
+//         onPress={() => {
+//           setIsVisible(state => {
+//             return !state;
+//           });
+//         }}>
+//         <Microphone style={styles.menuItemImage} />
+//       </TouchableOpacity>
+//       <Modal
+//         visible={isVisible}
+//         transparent={true}
+//         animationType="slide"
+//         onRequestClose={() => setIsVisible(false)}>
+//         <TouchableWithoutFeedback onPress={() => setIsVisible(false)}>
+//           <View style={styles.modalOverlay}>
+//             <TouchableWithoutFeedback>
+//               <View style={styles.modalContent}/>
+//             </TouchableWithoutFeedback>
+//           </View>
+//         </TouchableWithoutFeedback>
+//       </Modal>
+//     </>
+//   );
+// };
