@@ -6998,6 +6998,11 @@ uri-js@^4.2.2:
   dependencies:
     punycode "^2.1.0"
 
+use-elapsed-time@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/use-elapsed-time/-/use-elapsed-time-3.0.4.tgz#39bbef4f33654dfde4093ea987141effa442a7a7"
+  integrity sha512-q9b9j0K1SfsX2B9vzfRYkNyn2kBV5YBh9oJ/+XnIPKFjLbjvnF2PnJ/08HWPfCKKBWGz8d1qAfmXiYxWAseklw==
+
 use-latest-callback@^0.2.1:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/use-latest-callback/-/use-latest-callback-0.2.3.tgz#2d644d3063040b9bc2d4c55bb525a13ae3de9e16"

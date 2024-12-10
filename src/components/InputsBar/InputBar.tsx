@@ -5,7 +5,7 @@ import {PrimaryInputBar} from './PrimaryInputBar';
 import RecordinBar from './RecordingBar';
 
 export const InputBar = ({handleCameraClick = () => {}}) => {
-  const [isRecording, setIsRecording] = useState(true);
+  const [isRecording, setIsRecording] = useState(false);
   const [recordingTimeOut, setRecordingTimeOut] = useState<NodeJS.Timeout>();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [recordedAudioUri, setRecordedAudioUri] = useState<string>();
@@ -43,7 +43,7 @@ export const InputBar = ({handleCameraClick = () => {}}) => {
     //Todo: rename variable
     const recording = setTimeout(() => {
       stopAudioRecording();
-    }, 10000);
+    }, 60000);
 
     setRecordingTimeOut(recording);
     setIsRecording(true);
